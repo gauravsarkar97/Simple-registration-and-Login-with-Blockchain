@@ -1,0 +1,86 @@
+package com.example.gaura.myfilez;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.RemoteCall;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.protocol.core.methods.response.Web3ClientVersion;
+import org.web3j.protocol.http.HttpService;
+import org.web3j.protocol.infura.InfuraHttpService;
+import org.web3j.tx.gas.ContractGasProvider;
+import java.math.BigInteger;
+
+import java8.util.concurrent.CompletableFuture;
+
+public class TryApp {
+    private static final Logger log = LoggerFactory.getLogger(TryApp.class);
+
+    public static void main(String[] args) throws Exception {
+        new TryApp().run();
+    }
+
+    private void run() throws Exception {
+        // We start by creating a new web3j instance to connect to remote nodes on the network.
+        Web3j web3j = Web3j.build(new HttpService("http://172.16.189.101:8280"));
+        //Web3j web3j = Web3j.build(new InfuraHttpService("https://rinkeby.infura.io/v3/d6dabcc22b2a43529c396e48fa0f2660"));
+        Web3ClientVersion web3ClientVersion = web3j.web3ClientVersion().send();
+        String clientversion = web3ClientVersion.getWeb3ClientVersion();
+        System.out.println("Client Version: " + clientversion);
+        //log.info("Connected to Ethereum client version: " + web3j.web3ClientVersion().send().getWeb3ClientVersion());
+        Credentials credentials =
+                WalletUtils.loadCredentials(
+                        "1234",
+                        "D:\\ethereum\\ethereum\\keystore\\UTC--2019-06-06T08-24-34.055942100Z--b185dceef7168c77a3b40617aa068597bfe38a95");
+        System.out.println(web3j.ethAccounts().send().getAccounts());
+        ContractGasProvider cgs = new ContractGasProvider() {
+            @Override
+            public BigInteger getGasPrice(String contractFunc) {
+                return new BigInteger("0");
+            }
+
+            @Override
+            public BigInteger getGasPrice() {
+                return new BigInteger("0");
+            }
+
+            @Override
+            public BigInteger getGasLimit(String contractFunc) {
+                return new BigInteger("4000000");
+            }
+
+            @Override
+            public BigInteger getGasLimit() {
+                return new BigInteger("4000000");
+            }
+        };
+
+        Try contract = Try.deploy(web3j, credentials, cgs).send();
+        //Credentials credentials = Credentials.create("1F18F3AE0E672E117DF701BA38400677097F7F451B622AE9FA6CBDBEAE74350E");
+        //Try contract = Try.load("0x73d9a3b36aea893885862d14ed86fa891aa16154", web3j, credentials, cgs);
+
+        System.out.println(contract.getContractAddress());
+        System.out.println(contract.isValid());
+
+
+        System.out.println("AFter "+contract.isValid());
+
+        CompletableFuture<TransactionReceipt> transactionReceipt = contract.createParticipant("Gaurav", "1234").sendAsync();
+
+        System.out.println("TR"+transactionReceipt);
+
+
+
+        RemoteCall<String> result =  contract.getParticipantName(new BigInteger("0"));
+        System.out.println("RESULT " + result.send());
+
+
+        Boolean result2 = contract.userLogin(new BigInteger("0"), "Gaurav", "1234").send();
+        System.out.println("RESULT2-LOGIN " + result2);
+
+        RemoteCall<Boolean> result3 =  contract.userLogin(new BigInteger("0"), "Gaurav", "123456");
+        System.out.println("Result3 " + result3.send());
+
+    }
+}

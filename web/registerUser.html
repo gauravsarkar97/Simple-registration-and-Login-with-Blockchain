@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Reg-Login</title>
+    <link  rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.33/dist/web3.min.js"></script>
+    <script type="module" src="./js/register.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <nav class="teal">
+            <div class="nav-wrapper">
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="registerUser.html">REGISTER USER</a></li>
+                    <li><a href="login.html">LOGIN</a></li>
+                               </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col s6">
+                <h4>Register User</h4>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <h1 class="text-center">SIMPLE REG_LOGIN USING BLOCKCHAIN</h1>
+
+            <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">Registration</div>
+                            </div>
+                            <div class="panel-body" >
+                                <form id="signupform" class="form-horizontal" role="form">
+
+                                        <div id="signupalert">
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                        <label  class="col-md-3 control-label">Name</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="name" id="Uname" placeholder="Enter your name" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-md-3 control-label">Password</label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" id="password" name="passwd" placeholder="Enter Password" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <label for="repassword" class="col-md-3 control-label">Confirm Password</label>
+                                            <div class="col-md-9">
+                                                <input type="password" class="form-control" id="re-password" name="passwd" placeholder="Confirm Password" required>
+                                            </div>
+                                        </div>
+                                        <span id='message'></span>
+                                        <select class="form-control" id="usertype" style="margin-bottom: 25px" >
+                                            <option value="#">Select User Type</option>
+                                            <option value="Student">1. Student</option>
+                                            <option value="Faculty">2. Faculty</option>
+                                            <option value="Staff">3. Staff</option>
+                                            </select>
+
+
+
+                                        <div class="form-group">
+                                            <!-- Button -->
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button id="btnnew" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="icon-hand-right"></i> &nbsp Register User</button>
+                                            </div>
+                                            <h5 class="text-left">Note secret ID for future reference</h5>
+                                            <div id="user_id" class="panel-heading"></div>
+
+                                        </div>
+
+                                </form>
+                             </div>
+                        </div>
+
+
+</body>
+</html>
