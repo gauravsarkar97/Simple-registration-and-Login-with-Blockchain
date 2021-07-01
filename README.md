@@ -19,7 +19,7 @@ For running the project:
 
 4. Setup a private Blockchain using either Geth or Ganache.
 
-5. Use the Remix-Ethereum IDE to deply the contract. Make sure that the IDE is connected to the private blockchain node. For this choose "Web3 provider" as Environment.
+5. Use the Remix-Ethereum IDE to deploy the contract. Make sure that the IDE is connected to the private blockchain node. For this choose "Web3 provider" as Environment.
 
 6. Copy the deployed contract address, contract ABI and the account address in the utils.js file and register.js file.
 
